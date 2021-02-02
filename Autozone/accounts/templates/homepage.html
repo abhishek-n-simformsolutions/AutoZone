@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+
+{% block body %}
+
+<!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-none d-lg-flex">
+    <div class="container d-flex justify-content-between">
+      <div class="contact-info">
+        <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">contact@example.com</a>
+        <i class="fa fa-phone"></i> +1 5589 55488 55
+      </div>
+      {% if not user.is_authenticated %}
+      <div class="col">
+        <a href="{% url 'accounts:register_url'%}" type="Button" class="btn btn-primary">Register</a>
+        <a href="{% url 'accounts:login_url'%}" type="Button" class="btn btn-outline-success mr-0">Login</a>
+      </div>
+      {% else %}
+      {{user.full_name }}
+      {% endif %}
+    </div>
+  </section><!-- End Top Bar-->
+
+<!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container d-flex justify-content-between">
+
+      <div id="logo">
+        <!-- Uncomment below if you prefer to use an image logo -->
+         <a href="{%url 'accounts:homepage_url' %}"><img src="{%static 'img/carzone-logo.png'%}" alt=""></a>
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="index.html">Home</a></li>
+          <li><a href="#about">Sell My Car</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- End Header -->
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+
+{% endblock %}

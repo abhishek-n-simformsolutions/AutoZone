@@ -10,16 +10,19 @@ from .manager import UserManager
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_('username'), max_length=130, unique=True)
     full_name = models.CharField(_('full name'), max_length=130, blank=True)
-    phone_number = models.BigIntegerField(unique=True)
+    phone_number = models.BigIntegerField(unique=True, null=True, blank=True)
     is_staff = models.BooleanField(_('is_staff'), default=False)
     is_active = models.BooleanField(_('is_active'), default=True)
     date_joined = models.DateField(_("date_joined"), default=date.today)
     is_new_cardealer = models.BooleanField(default=False)
+    is_bank = models.BooleanField(default=False)
     phone_number_verified = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
     change_pw = models.BooleanField(default=True)
-    country_code = models.IntegerField()
-
+    country_code = models.IntegerField(default=+91)
+    email=models.EmailField(null=True, max_length=50)
+    last_name= models.CharField(null=True,max_length=50)
+    first_name = models.CharField(null=True,max_length=50)
     objects = UserManager()
 
     USERNAME_FIELD = 'username'

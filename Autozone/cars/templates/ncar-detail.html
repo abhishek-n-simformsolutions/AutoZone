@@ -1,0 +1,215 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}all details about car{%endblock%}
+{%block head%}
+{%block css%}
+<style>
+    .carousel-inner img{
+    width:100%;
+    hight:100%;
+    }
+
+
+
+
+</style>
+{%endblock%}
+{%endblock%}
+
+{%block body%}
+
+<!--    ----------------------------------------------->
+{%if user.is_authenticated and not user.is_bank and not user.is_new_cardealer%}
+
+<header id="header">
+    <div class="container d-flex justify-content-between">
+        <div id="logo">
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="{%url 'accounts:homepage_url' %}"><img alt="" src="{%static 'img/carzone-logo.png'%}"></a>
+        </div>
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li class="menu-active"><a href="{%url 'accounts:homepage_url'%}">Home</a></li>
+                <li><a href="{% url 'cars:register-old-car-url'%}">Sell My Car</a></li>
+                <li><a href="{% url 'cars:buy-used-car' %}">Buy Used Car</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'cars:my-registered-car-url' %}">My Registered Car</a></li>
+                {% endif %}
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header>
+{%endif%}
+<!--    -------------------------------------------------------------->
+<div class="container">
+    <div class="row">
+        <!--card1:image card-->
+        <div align="center" class="card" style="width:600px;margin-top:32px;">
+            <div class="card-body">
+                <div class="carousel slide" data-ride="carousel" id="demo" style="color:red;">
+                    <ul class="carousel-indicators">
+                        <li class="active" data-slide-to="0" data-target="#demo"></li>
+                        <li data-slide-to="1" data-target="#demo"></li>
+                        <li data-slide-to="2" data-target="#demo"></li>
+                    </ul>
+                    <div align="center" class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img alt="first" height="400" src="{{ carinstance.image.url }}" width="400">
+                        </div>
+                        {%if carinstance.image1%}
+                        <div class="carousel-item">
+                            <img alt="second" height="400" src="{{ carinstance.image1.url }}" width="400">
+                        </div>
+                        {%endif%}
+                        {%if carinstance.image2%}
+                        <div class="carousel-item">
+                            <img alt="third" height="400" src="{{ carinstance.image2.url }}" width="400">
+                        </div>
+                        {%endif%}
+                    </div>
+                    <a class="carousel-control-prev" data-slide="prev" href="#demo">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" data-slide="next" href="#demo">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+                {%if carinstance.added_by.id != user.id %}
+                <div class="row">
+                    <div align="center" class="likesystem" style="margin:30px">
+                        <button class='likes btn btn-primary' data-id={{carinstance.id}} data-type='carinstance'>
+                            like
+                        </button>
+                        <span class='countlikes'>{{carinstance.likesystem.likes.count}} likes</span>
+                    </div>
+                </div>
+                {%endif%}
+            </div>
+        </div>
+
+        <!--card2 deatail card-->
+        <div class="card" style="width:660px;margin-top:32px; margin-left:12px;">
+            <div style="card-body">
+                <center class="col">
+                    <div>
+                        <h2>
+                            <center><b>OVERVIEW</b></center>
+                        </h2>
+                    </div>
+                </center>
+            </div>
+            <br><br>
+            <!--1-->
+            <div class="row">
+                <img src="{% static 'img/svg/car.svg' %}"
+                     style="height:60px; width:60px;margin-left:42px;opacity:50%;">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Car Model</h6>
+                    <h6 style="margin-left:2px; width:100px;"><b>{{ carinstance.car_model.car_model_name}}</b>
+                    </h6>
+                </div>
+                <img src="{% static 'img/svg/factory.svg' %}"
+                     style="height:60px; width:60px; margin-left:130px;opacity:50%">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:110px;margin-bottom:0px;">Manufacturer</h6>
+                    <h6 style="margin-left:2px; width:100px;"><b>{{ carinstance.car_model.car_company.company_name }}</b></h6>
+                </div>
+            </div>
+            <br>
+            <!--         2-->
+            <div class="row">
+                <img src="{% static 'img/svg/milestone.svg' %}"
+                     style="height:60px; width:60px; margin-left:42px;opacity:50%">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Mileage</h6>
+                    <h6 style="margin-left:2px; width:100px;"><b>{{carinstance.mileage}} Kmpl</b></h6>
+                </div>
+                <img src="{% static 'img/svg/calendar.svg' %}"
+                     style="height:60px; width:60px;margin-left:130px;opacity:50%;">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Year</h6>
+                    <h6 style="margin-left:2px; width:100px;"><b>{{carinstance.get_reg_year_display}}</b></h6>
+                </div>
+            </div>
+            <br>
+            <!--3-->
+            <div class="row">
+                <img src="{% static 'img/svg/road.svg'%}"
+                     style="height:60px; width:60px;margin-left:42px;opacity:50%;">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">KMs Driven</h6>
+                    <h6 style="margin-left:2px; width:100px;"><b>{{carinstance.km_driven}}</b></h6>
+                </div>
+                <img src="{% static 'img/svg/gearbox.svg'%}"
+                     style="height:60px; width:60px; margin-left:130px;opacity:55%">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Tramsmission</h6>
+                    <h6 style="margin-left:2px; width:100px;">
+                        <b>{{carinstance.get_transmission_type_display}}</b></h6>
+                </div>
+            </div>
+            <br>
+            <!--4-->
+            <div class="row">
+                <img src="{% static 'img/svg/price.svg' %}"
+                     style="height:60px; width:60px;margin-left:42px;opacity:50%;">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Price</h6>
+                    <h6 style="margin-left:2px; width:100px;"><b>{{carinstance.price}}</b></h6>
+                </div>
+                <img src="{% static 'img/svg/gasoline-pump.svg' %}"
+                     style="height:60px; width:60px; margin-left:130px;opacity:40%">
+                <div class="col" style="width:100px;">
+                    <h6 style="opacity:50%; margin-left:2px; width:100px;margin-bottom:0px;">Fuel Type</h6>
+                    <h6 style="margin-left:2px; width:100px;"><b>{{carinstance.get_fuel_type_display}}</b></h6>
+                </div>
+            </div>
+            <!--like button -->
+            {%if carinstance.added_by.id != user.id %}
+            <center>
+                <div class="d-flex justify-content-center" style="margin:60px;">
+                    <div class="col-4">
+                        <a class="btn btn-primary" href="{% url 'loan:apply-for-loan-url' carinstance.id %}">Apply
+                            for Loan</a>
+                    </div>
+                    {% if contact_flag %}
+                    <div class="col-4">
+                        <p>
+                            car owner contact:{{carinstance.added_by.phone_number}}
+                        </p>
+                    </div>
+                    {% else %}
+                    <div class="col-4">
+                        <a class="btn btn-primary"
+                           href="{%url 'cars:get-contact-detail-url' carinstance.added_by.phone_number carinstance.id %}">Get
+                            Contact Details</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </center>
+            {%else%}
+            <center>
+                <div class="d-flex justify-content-center">
+                    <div class="col-2">
+                        <a class="btn btn-primary my-3 mx-auto"
+                           href="{%url 'cars:update-used-car-url' carinstance.id%}">Edit</a>
+                    </div>
+                    <div class="col-2">
+                        <a class="btn btn-danger my-3 mx-auto"
+                           href="{%url 'cars:delete-used-car-url' carinstance.id%}">DELETE</a>
+                    </div>
+                </div>
+            </center>
+            {%endif%}
+        </div>
+    </div>
+    <!---->
+</div>
+</div>
+</div>
+{%endblock%}
+
+{%block javascript%}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{% static 'js/like_system.js' %}"></script>
+{%endblock%}

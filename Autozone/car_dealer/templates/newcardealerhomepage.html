@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}
+
+{%endblock%}
+
+{%block css%}
+{%endblock%}
+
+{%block body%}
+<div class="container">
+<br>
+    <br>
+    <h2>NEW CAR DEALER HOMEPAGE</h2>
+        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+        <a class="btn btn-primary" href="{%url 'car_dealer:add-new-car-url'%}">ADD NEW CAR</a>
+        </div>
+    <hr></hr>
+        <h5>your uploaded car list</h5>
+    <div class="d-flex justify-content-between flex-wrap">
+        {% for carinstance in carinstancelist %}
+        <a href="{% url 'cars:my-registered-car-detail-url' carinstance.id %}" style="width:350px; margin:18px;">
+            <div class="card h-100" style="width:350px; height:150px; border:none; box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);">
+                <div class="card-body">
+                    <img src="{{ carinstance.image.url }}" style="width:300; height:200px;">
+                    <h4 class="align-self-end card-title" style="font-weight: bold;">
+                        {{ carinstance.get_reg_year_display }} {{ carinstance.car_model }}
+                    </h4>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+    {%endblock%}
+
+    {%block javascript%}
+
+    {%endblock%}

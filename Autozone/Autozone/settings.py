@@ -45,14 +45,26 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'debug_toolbar',
     'crispy_forms',
+    'autofixture',
+    'like_system',
 ]
 
 LOCAL_APPS = [
-    'accounts',
+    'accounts.apps.AccountsConfig',
+    'cars.apps.CarsConfig',
+    'loan.apps.LoanConfig',
+    'car_dealer.apps.CarDealerConfig'
 ]
+
+# for like system django-like-system configuration
+LIKES_OBJS_DICT = {'cars.models': ['CarInstance',]}
 
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_URL = 'accounts:login_url'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,10 +151,20 @@ INTERNAL_IPS = ('127.0.0.1',)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_FINDERS = [
+     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'static/'),
 )
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 AUTHY_KEY = config("AUTHY_KEY")
+TWILIO_ACCOUNT_SID = config("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = config("TWILIO_AUTH_TOKEN")
+TWILIO_NUMBER = config("TWILIO_NUMBER")

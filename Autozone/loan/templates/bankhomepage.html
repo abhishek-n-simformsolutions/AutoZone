@@ -1,0 +1,64 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}
+{%endblock%}
+
+{%block css%}
+{%endblock%}
+
+
+{%block body%}
+<div class="container">
+    <h2> Loan Requests</h2>
+    <hr>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'loan:bank_homepage_url'%}">Loan Requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'loan:approved_loanpage_url'%}">Approved Loan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'loan:rejected_loanpage_url'%}">Rejected Loan</a>
+            </li>
+            <li class="nav-item">
+                <div class="float-right">
+                    <a class="btn btn-outline-success mx-0" href="{% url 'accounts:logout_url'%}" type="Button">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="row no-gutters">
+        {% for loaninstance in loaninstancelist %}
+        <div class="col-12">
+            <div class="card border-primary" ><!--style="border:1px solidblack;"-->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            Loan Appliyer:{{ loaninstance.appliyer.username }}<br>
+                            Loan Desired amount:{{ loaninstance.desired_amount }}<br>
+                            Car price:{{ loaninstance.carinstance.price }}<br>
+                            Income of Appliyer:{{ loaninstance.income }}<br>
+                            {%if not loaninstance.approved and not loaninstance.rejected%}
+                            <a class="btn btn-primary"
+                               href="{% url 'loan:approve_loan_url' loaninstance.id %}">Approve</a>
+                            <a class="btn btn-danger" href="{% url 'loan:reject_loan_url' loaninstance.id %}">Reject</a>
+                            {%endif%}
+                        </div>
+                        <div class="col-4">
+                            <img src="{{loaninstance.income_proof.url}}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    {%endblock%}
+
+
+    {%block javascript%}
+    {%endblock%}

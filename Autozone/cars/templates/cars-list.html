@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block title %}
+Registered car list
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+<!--------------------------------------------------------------------------------------------->
+<header id="header">
+    <div class="container d-flex justify-content-between">
+
+        <div id="logo">
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="{%url 'accounts:homepage_url' %}"><img alt="" src="{%static 'img/carzone-logo.png'%}"></a>
+        </div>
+
+        <nav id="nav-menu-container">
+            <ul class="nav-menu">
+                <li><a href="{%url 'accounts:homepage_url'%}">Home</a></li>
+                <li><a href="{% url 'cars:register-old-car-url'%}">Sell My Car</a></li>
+                <li><a href="{% url 'cars:buy-used-car' %}">Buy Used Car</a></li>
+                {% if user.is_authenticated %}
+                <li class="menu-active"><a href="{% url 'cars:my-registered-car-url' %}">My Registered Car</a></li>
+                {% endif %}
+            </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+</header><!-- End Header -->
+
+<hr>
+
+<section class="d-none d-lg-flex" id="topbar">
+    <div class="container">
+        <!--        <div class="d-flex justify-content-around">-->
+        <form action="." method="GET">
+            <div class="row">
+                <!------------->
+                <div class="col">
+                    <label for="car_company">Company</label>
+                    <select class="form-control" id="car_company" name="car_company">
+                        <option selected>Choose...</option>
+                        {% for company in companies %}
+                        <option value="{{ company }}">{{ company }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!------------->
+                <div class="col">
+                    <label for="city">City</label>
+                    <select class="form-control" id="city" name="city">
+                        <option selected>Choose...</option>
+                        {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!----------------->
+                <div class="col">
+                    <label for="reg_year">Year of Registration</label>
+                    <select class="form-control" id="reg_year" name="reg_year">
+                        <option selected>Choose...</option>
+                        <option value="a">2010</option>
+                        <option value="b">2011</option>
+                        <option value="c">2012</option>
+                        <option value="d">2013</option>
+                        <option value="e">2014</option>
+                        <option value="f">2015</option>
+                        <option value="g">2016</option>
+                        <option value="h">2017</option>
+                        <option value="i">2018</option>
+                        <option value="j">2019</option>
+                        <option value="k">2020</option>
+                        <option value="l">2021</option>
+                    </select>
+                </div>
+                <!----------------->
+                <div class="col">
+                    <label for="transmission">Transmission type</label>
+                    <select class="form-control" id="transmission" name="transmission">
+                        <option selected>Choose...</option>
+                        <option value="m">Manual</option>
+                        <option value="a">Automatic</option>
+                    </select>
+                </div>
+                <!----------------->
+                <div class="col">
+                    <label for="fuel_type">fuel type</label>
+                    <select class="form-control" id="fuel_type" name="fuel_type">
+                        <option selected>Choose...</option>
+                        <option value="p">Petrol</option>
+                        <option value="d">Deisel</option>
+                        <option value="g">Gas</option>
+                    </select>
+                </div>
+                <!---------------------------------------------------->
+                <center>
+                    <br>
+                    <button class="btn btn-primary" style="{margin-top:20px; align:centre;}">search</button>
+                </center>
+            </div>
+        </form>
+    </div>
+    <!--    </div>-->
+</section>
+
+
+<section class="carlist">
+    <div class="container">
+        <div class="d-flex justify-content-between flex-wrap px-5">
+            {% for carinstance in carinstancelist %}
+            <a href="{% url 'cars:my-registered-car-detail-url' carinstance.id %}" style="width:350px; margin:18px;">
+                <div class="card h-100"
+                     style="width:350px; height:150px; border:none; box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);">
+                    <div class="card-body">
+                        <img src="{{ carinstance.image.url }}" style="width:300; height:200px;">
+                        <h4 class="align-self-end card-title" style="font-weight: bold;">
+                            {{ carinstance.get_reg_year_display }} {{ carinstance.car_model }}
+                        </h4>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!------------------------------------------------------------------------------------------------->
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+
+
+

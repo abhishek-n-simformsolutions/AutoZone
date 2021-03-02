@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 class RegisterForm(forms.ModelForm):
     phone_number = forms.IntegerField(required=True)
-    password = forms.CharField(widget=forms.PasswordInput())
+    password= forms.CharField(widget=forms.PasswordInput())
     confirm_password = forms.CharField(widget=forms.PasswordInput())
     country_code = forms.IntegerField(initial='+91')
 
@@ -47,3 +47,16 @@ class PhoneVerificationForm(forms.Form):
 
     class Meta:
         fields = ['one_time_password', ]
+
+
+class CustomPasswordResetForm(forms.Form):
+    country_code = forms.IntegerField(initial='+91')
+    phone_number = forms.IntegerField()
+
+    def clean_phone_number(self):
+        phone_number = self.data.get('phone_number')
+        if not User.objects.filter(phone_number=phone_number).exists():
+            raise forms.ValidationError(
+                _("No account exists with this phone number"))
+        return phone_number
+

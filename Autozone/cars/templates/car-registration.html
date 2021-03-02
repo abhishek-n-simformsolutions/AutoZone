@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+Car-Registration
+{% endblock %}
+
+{% block css %}
+<style>
+    .asteriskField { display: none; }
+
+
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+<section id="formpage">
+    <div class="formpage-content">
+        <div class="card" style="width:80vw; height:90vh;">
+<!--                            {% csrf_token %}-->
+            {% crispy form %}
+<!--            <button class="btn btn-primary" type="submit">Submit</button>-->
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

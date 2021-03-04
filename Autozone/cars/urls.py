@@ -11,6 +11,6 @@ urlpatterns = [
     path('update/<int:id>/', views.UpdateUsedCarView.as_view(), name='update-used-car-url'),
     path('delete/<int:id>/',  views.DeleteUsedCarView.as_view(), name='delete-used-car-url'),
     path('get-contact-detail/<int:owner_number>/<int:carinstance_id>/', views.GetContactDetail, name='get-contact-detail-url'),
-
+    path('get-liked-cars/', views.GetLikedCarsListView.as_view(), name='get-liked-cars-list-url'),
 ]
 

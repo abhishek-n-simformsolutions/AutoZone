@@ -21,12 +21,12 @@ Homepage
         {% if not user.is_authenticated %}
         <div class="col">
             <a class="btn btn-primary" href="{% url 'accounts:register_url'%}" type="Button">Register</a>
-            <a class="btn btn-outline-success mr-0" href="{% url 'accounts:login_url'%}" type="Button">Login</a>
+            <a  type="Button" class="btn btn-outline-success mr-0" href="{% url 'accounts:login_url'%}" >Login</a>
         </div>
         {% else %}
         <div class="col">
             <span>{{user.full_name}}</span>
-            <a class="btn btn-outline-success mx-0" href="{% url 'accounts:logout_url'%}" type="Button">Logout</a>
+            <a type="Button" class="btn btn-primary" href="{% url 'accounts:logout_url'%}" >Logout</a>
         </div>
         {% endif %}
     </div>
@@ -43,7 +43,7 @@ Homepage
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-                <li class="menu-active"><a href="index.html">Home</a></li>
+                <li class="menu-active"><a href="{%url 'accounts:homepage_url'%}">Home</a></li>
                 <li><a href="{% url 'cars:register-old-car-url'%}">Sell My Car</a></li>
                 <li><a href="{% url 'cars:buy-used-car' %}">Buy Used Car</a></li>
                 {% if user.is_authenticated %}
@@ -55,13 +55,13 @@ Homepage
 </header><!-- End Header -->
 
 <section id="intro">
-    <div class="intro-content">
-        <h2>Making your idea of dream car <br>happen!</h2>
-        <!--      <div>-->
-        <!--        <a href="#about" class="btn-get-started scrollto">Get Started</a>-->
-        <!--        <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>-->
-        <!--      </div>-->
-    </div>
+<!--    <div class="intro-content">-->
+<!--        <h2>Making your idea of dream car <br>happen!</h2>-->
+<!--        &lt;!&ndash;      <div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <a href="#about" class="btn-get-started scrollto">Get Started</a>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>&ndash;&gt;-->
+<!--        &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    </div>-->
     <div class="owl-carousel" id="intro-carousel">
         <img class="item" src="{%static '/img/intro-carousel/2.jpg'%}">
         <!--      <div class="item" style="background-image: url('assets/img/intro-carousel/2.jpg');"></div>-->

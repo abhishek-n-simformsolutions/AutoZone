@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
+from like_system.models import LikeSystem
 from twilio.rest import Client
 
 from .forms import RegisterOldCarForm
@@ -139,4 +140,13 @@ def GetContactDetail(request, owner_number, carinstance_id):
                            body=message_to_broadcast)
     carinstance=get_object_or_404(CarInstance, pk=carinstance_id)
     return render(request,'ncar-detail.html',{'carinstance': carinstance, 'contact_flag': True})
+
+@method_decorator(login_required, name='dispatch')
+class GetLikedCarsListView(ListView):
+    template_name = 'cars-list.html'
+
+    def get_queryset(self):
+        user=self.request.user
+        l=LikeSystem.objects.filter(user=user).only('object_id')
+        return CarInstance.objects.filter(id__in=l)
 

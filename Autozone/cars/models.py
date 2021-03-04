@@ -1,7 +1,6 @@
 from PIL import Image
 from django.conf import settings
 from django.db import models
-
 # Create your models here.
 from accounts.models import User
 from like_system.models import LikesTarget
@@ -103,7 +102,7 @@ class CarInstance(LikesTarget):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
-    mileage = models.PositiveIntegerField(max_length=2, blank=True,)
+    mileage = models.PositiveIntegerField(blank=True)
     is_new = models.BooleanField(default=False)
 
     # likes=models.ManyToManyField(User,blank=True, related_name='likes')

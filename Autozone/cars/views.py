@@ -141,6 +141,7 @@ def GetContactDetail(request, owner_number, carinstance_id):
     carinstance=get_object_or_404(CarInstance, pk=carinstance_id)
     return render(request,'ncar-detail.html',{'carinstance': carinstance, 'contact_flag': True})
 
+
 @method_decorator(login_required, name='dispatch')
 class GetLikedCarsListView(ListView):
     template_name = 'cars-list.html'

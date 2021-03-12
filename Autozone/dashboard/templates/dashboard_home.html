@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div class='row'>
+    {{months}}
+    <div class='col-sm-12'>
+        <h1>Hello World</h1>
+        <div class='col-sm-6'>
+            <canvas id="myChart" width="400" height="400"></canvas>
+
+        </div>
+    </div>
+</div>
+<!--<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    var num_of_user = [];
+    var month = [];
+    num_of_user={{num_of_users}};
+    month={{months}}
+
+    function setChart(){
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Number of users',
+                data: num_of_users,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    
+        
+    }
+</script>
+
+
+
+</body>
+</html>

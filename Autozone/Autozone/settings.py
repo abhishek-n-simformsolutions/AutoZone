@@ -47,13 +47,15 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'autofixture',
     'like_system',
+    'chartjs',
 ]
 
 LOCAL_APPS = [
     'accounts.apps.AccountsConfig',
     'cars.apps.CarsConfig',
     'loan.apps.LoanConfig',
-    'car_dealer.apps.CarDealerConfig'
+    'car_dealer.apps.CarDealerConfig',
+    'dashboard.apps.DashboardConfig',
 ]
 
 # for like system django-like-system configuration
@@ -154,7 +156,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 STATICFILES_FINDERS = [
      'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
 STATIC_URL = '/static/'

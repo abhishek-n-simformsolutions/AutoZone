@@ -1,0 +1,1 @@
+[{"model": "loan.bankprofile", "pk": 15, "fields": {"user": 26, "name": ""}}, {"model": "loan.loaninstance", "pk": 6, "fields": {"carinstance": 1, "appliyer": 1, "desired_amount": 200000, "loan_bank": 15, "income": 10000, "income_proof": "media/loan-document/bg-01-1600x600_hL8avVK.jpeg", "approved": false, "rejected": true}}]

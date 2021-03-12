@@ -26,6 +26,7 @@ urlpatterns = [
     path('cars/', include('cars.urls', namespace='cars')),
     path('loan/', include('loan.urls', namespace='loan')),
     path('new-car-dealer/', include('car_dealer.urls', namespace='car_dealer')),
+    path('dashboard/',include('dashboard.urls', namespace='dashboard')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

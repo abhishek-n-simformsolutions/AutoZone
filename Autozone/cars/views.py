@@ -24,6 +24,7 @@ class RegisterOldCar(CreateView):
         car_instance = form.save(commit=False)
         car_instance.added_by = self.request.user
         car_instance.save()
+        return redirect(self.success_url)
 
 def is_valid_queryparam(param):
     return param != '' and param is not None

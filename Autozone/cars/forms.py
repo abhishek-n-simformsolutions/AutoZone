@@ -8,7 +8,7 @@ from .models import CarInstance
 class RegisterOldCarForm(forms.ModelForm):
     class Meta:
         model = CarInstance
-        fields = ['car_model', 'car_varient', 'price', 'fuel_type', 'transmission_type', 'reg_year', 'km_driven', 'city',
+        fields = ['car_model', 'car_varient', 'price', 'fuel_type', 'transmission_type', 'reg_year', 'km_driven', 'city','mileage',
                   'image', 'image1', 'image2']
 
     def __init__(self, *args, **kwargs):
@@ -21,9 +21,10 @@ class RegisterOldCarForm(forms.ModelForm):
                 css_class='row mb-3'
             ),
             Row(
-                Column('price', css_class='form-group col-md-4'),
-                Column('km_driven', css_class='form-group col-md-4'),
-                Column('reg_year', css_class='form-group col-md-4'),
+                Column('price', css_class='form-group col-md-3'),
+                Column('km_driven', css_class='form-group col-md-3'),
+                Column('reg_year', css_class='form-group col-md-3'),
+                Column('mileage', css_class='form-group col-md-3'),
                 css_class='row mb-3'
             ),
             Row(

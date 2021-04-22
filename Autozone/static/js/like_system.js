@@ -45,7 +45,7 @@ $(function() {
             var likesystem_block = $(this).parent('.likesystem')
 
             $.ajax({
-                url : '/'+action_type+'/'+ object_id +'/like/',
+                url : '/like/'+action_type+'/'+ object_id +'/like/',
                 context: $(likesystem_block),
                 type : 'POST',
 

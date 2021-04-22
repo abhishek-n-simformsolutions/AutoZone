@@ -17,11 +17,13 @@ import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse_lazy
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('like_system.urls')),
+    path('like/', include('like_system.urls')),
+    path('', RedirectView.as_view(url=reverse_lazy('accounts:homepage_url'))),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('cars/', include('cars.urls', namespace='cars')),
     path('loan/', include('loan.urls', namespace='loan')),
